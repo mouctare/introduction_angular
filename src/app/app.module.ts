@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
+  // injection de dependance
   providers: [],
   bootstrap: [AppComponent]
 })
