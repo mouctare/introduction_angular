@@ -37,4 +37,8 @@ goToPokemonList(){
   this.router.navigate(['/pokemons']);
 }
 
+//En parametre, je prend le pokemon vers lequel, je vais etre rédirigé
+goToEditPokemon(pokemon:Pokemon){
+   this.router.navigate(['/edit/pokemon', pokemon.id])
+}
 }
