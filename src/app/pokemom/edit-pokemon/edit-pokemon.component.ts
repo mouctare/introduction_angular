@@ -27,7 +27,7 @@ export class EditPokemonComponent implements OnInit {
     const pokemonIdDepuisLurl: string|null = this.route.snapshot.paramMap.get('id');
     if(pokemonIdDepuisLurl){
       //Si j'ai un id , je l'ajoute dans ma proprité pokemon
-      this.pokemon = this.pokemonService.getPokemonById(+pokemonIdDepuisLurl)
+      this.pokemonService.getPokemonById(+pokemonIdDepuisLurl).subscribe(pokemon => this.pokemon = pokemon);
     } else {
       this.pokemon = undefined;
     }

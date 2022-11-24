@@ -20,7 +20,9 @@ export class ListPokemonComponent implements OnInit{
 
     ngOnInit(){
       //On appelle le serviece et ses méthodes
-      this.pokemonList = this.pokemonService.getPokemonList();
+      this.pokemonService.getPokemonList()
+      .subscribe(pokemonList => this.pokemonList = pokemonList); 
+      // Ici, je m'abonne à ce service pour me retourner ce flux de données une fois que l'ai, je l'attrubit à ma pokemonList
     }
 
   

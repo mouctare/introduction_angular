@@ -11,7 +11,7 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonFormComponent implements OnInit{
  @Input() pokemon: Pokemon
   types: string[];
-
+  isAddForm: boolean;
   constructor(
     private pokemonService: PokemonService,
     private router: Router
@@ -20,7 +20,8 @@ export class PokemonFormComponent implements OnInit{
   //Initialisation
   ngOnInit() {
    // L'initialisation avec tous les types de pokemons dans le projet
-   this.types = this.pokemonService.getPokemonTypeList()
+   this.types = this.pokemonService.getPokemonTypeList();
+   this.isAddForm = this.router.url.includes('add'); // Si le terme add dans ma route ça veut dire que je suis entrain d'ajouter
   }
 
   
@@ -56,10 +57,16 @@ export class PokemonFormComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log('Submit form');
-    //Redirigé vers la page du pokemon qu'il vient de modifier
-    this.router.navigate(['/pokemon', this.pokemon.id])
+    if(this.isAddForm){
+      this.pokemonService.addPokemon(this.pokemon)
+      .subscribe((pokemon:Pokemon) =>  this.router.navigate(['/pokemon', pokemon.id]))
+    } else {
+      this.pokemonService.updatePokemon(this.pokemon)
+      .subscribe(() =>  this.router.navigate(['/pokemon', this.pokemon.id]))
+        //Redirigé vers la page du pokemon qu'il vient de modifier 
 
     }
 
+   }
 }
+
